@@ -116,7 +116,7 @@ function echart1() {
       textStyle: {
         color: "#eee",
       },
-      fontSize: '0.5em'
+      fontSize: "0.5em",
     },
     legend: {
       bottom: 5,
@@ -229,7 +229,7 @@ function echart2() {
       itemWidth: 14,
       itemHeight: 5,
       itemGap: 13,
-      data: ["小型车", "中型车", "大型车"],
+      data: ["气压", "温度", "湿度"],
       right: "1em",
       top: "0px",
       textStyle: {
@@ -302,7 +302,7 @@ function echart2() {
     ],
     series: [
       {
-        name: "小型车",
+        name: "气压",
         type: "line",
         smooth: true,
         lineStyle: {
@@ -341,7 +341,7 @@ function echart2() {
         data: [20, 35, 34, 45, 52, 41, 49, 64, 24, 52.4, 24, 33],
       },
       {
-        name: "中型车",
+        name: "温度",
         type: "line",
         smooth: true,
         lineStyle: {
@@ -383,7 +383,7 @@ function echart2() {
         ],
       },
       {
-        name: "大型车",
+        name: "湿度",
         type: "line",
         smooth: true,
         lineStyle: {
@@ -431,8 +431,285 @@ function echart2() {
     myChart.resize();
   });
 }
-function echart3() {}
-function echart4() {}
+function echart3() {
+  var myChart = echarts.init(document.getElementById("chart8"));
+  var data = [
+    {value: 1200,name: 'CPU'},
+    {value: 203,name: 'COE'},
+    { value: 146, name: "GPU" },
+  ];
+  option = {
+    backgroundColor: "rgba(0,0,0,0)",
+    // tooltip: {
+    //   trigger: "item",
+    //   formatter: "{b}:<br/>{c}({d}%)"
+    // },
+    grid: {
+      top: "100%",
+      left: "50%",
+      right: "50%",
+      containLabel: true,
+    },
+    color: ["#20b9cf66", "#2089cf66", "#205bcf66"],
+    legend: {
+      x: "center",
+      y: "center",
+      orient: "vertical",
+      itemGap: 2,
+      itemWidth: 6,
+      itemHeight: 6,
+      icon: "",
+      data: ["CPU", "GPU", "COE"],
+      textStyle: {
+        color: [],
+        fontStyle: "normal",
+        fontSize: 6,
+      },
+    },
+    series: [
+      {
+        name: "123",
+        type: "pie",
+        clockwise: false,
+        minAngle: 20,
+        center: ["50%", "50%"],
+        radius: [25, 40],
+        itemStyle: {
+          normal: {
+            borderColor: "transparent",
+            borderWidth: 1,
+          },
+        },
+        label: {
+          normal: {
+            show: true,
+            position: "inside",
+            formatter: "{d}%",
+            textStyle: {
+              color: "#fff",
+              fontSize: 10,
+            },
+          },
+          emphasis: {
+            show: true,
+            textStyle: {
+              fontWeight: "bold",
+            },
+          },
+        },
+        data: data,
+      },
+      {
+        name: "",
+        type: "pie",
+        clockwise: false,
+        silent: true,
+        minAngle: 20,
+        // center: ['35%', '50%'],
+        radius: [0, 20],
+        itemStyle: {
+          normal: {
+            borderColor: "#1e2239",
+            borderWidth: 1,
+            opacity: 0.21,
+          },
+        },
+        label: {
+          normal: {
+            show: true,
+          },
+        },
+        data: data,
+      },
+    ],
+  };
+
+  myChart.setOption(option);
+  window.addEventListener("resize", function () {
+    myChart.resize();
+  });
+}
+function echart4() {
+  // 需要展示的数据
+  let resData = [
+    { name: "", value: 80 },
+    { name: "", value: 40 },
+    { name: "", value: 60 },
+  ];
+  let name = resData.map((item) => item.name); // 获取名称
+  let value = resData.map((item) => item.value); // 获取数值
+  let sum = value.reduce((pre, cur) => (pre += cur), 0); // 总和
+  let color = [
+    // 颜色
+    ["#6fc1fb", "#1971e7"],
+    ["#983fff", "#2c23ff"],
+    ["#fff582", "#59f9d2"],
+  ];
+  let series = [];
+  let yAxis = [];
+  for (let i = 0; i < resData.length; i++) {
+    series.push({
+      type: "pie",
+      clockWise: true, //顺时加载
+      hoverAnimation: false, // 鼠标移入变大
+      radius: [60 - i * 12 + "%", 53 - i * 12 + "%"], // 圆环
+      center: ["50%", "50%"],
+      itemStyle: {
+        normal: {
+          label: {
+            show: false,
+          },
+          labelLine: {
+            show: false,
+          },
+          borderWidth: 18,
+        },
+      },
+      data: [
+        {
+          name: resData[i].name,
+          value: resData[i].value,
+          itemStyle: {
+            normal: {
+              // 渐变色
+              color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                {
+                  offset: 0,
+                  color: color[i][0],
+                },
+                {
+                  offset: 1,
+                  color: color[i][1],
+                },
+              ]),
+            },
+          },
+        },
+        {
+          // 阴影段
+          name: "",
+          value: sum - resData[i].value,
+          itemStyle: {
+            normal: {
+              color: "transparent",
+            },
+          },
+          tooltip: {
+            // 不显示提示框
+            show: false,
+          },
+          hoverAnimation: false, // 鼠标移入变大
+        },
+      ],
+    });
+    series.push({
+      name: "",
+      type: "pie",
+      clockWise: true, //顺时加载
+      z: 1, // 层级，默认为 2，z小的会被z大的覆盖住
+      hoverAnimation: true, // 鼠标移入变大
+      radius: [60 - i * 12 + "%", 53 - i * 12 + "%"], // 圆环
+      center: ["50%", "50%"], // 位置
+      label: {
+        show: false,
+      },
+      itemStyle: {
+        normal: {
+          label: {
+            show: false,
+          },
+          labelLine: {
+            show: false,
+          },
+          borderWidth: 18,
+        },
+      },
+      data: [
+        {
+          // 阴影的75%
+          value: 7.5,
+          itemStyle: {
+            normal: {
+              color: "rgba(1,179,238,0.1)",
+            },
+          },
+          tooltip: {
+            show: false,
+          },
+        },
+        {
+          // 阴影的最后25%，透明
+          value: 2.5,
+          itemStyle: {
+            normal: {
+              color: "rgba(0,0,0,0)",
+              borderWidth: 0,
+            },
+          },
+          tooltip: {
+            show: false,
+          },
+        },
+      ],
+    });
+    yAxis.push(resData[i].name);
+  }
+  let myChart = echarts.init(document.getElementById("chart4"));
+  let option = {
+    legend: {
+      show: true,
+      x: "center",
+      top: "0%",
+      itemGap: 3,
+      itemWidth: 8,
+      itemHeight: 8,
+      textStyle: {
+        fontSize: 7,
+        color: "#fff",
+      },
+      data: name,
+    },
+    grid: {
+      top: "13%",
+      left: "55%",
+      width: "35%",
+      height: "30%",
+      containlabel: false,
+    },
+    xAxis: [
+      {
+        // x轴隐藏
+        show: false,
+      },
+    ],
+    yAxis: [
+      {
+        // y轴配置
+        type: "category",
+        asisLine: {
+          show: true,
+        },
+        axisTick: {
+          show: false,
+        },
+        axisLabel: {
+          show: true,
+          interval: 0,
+          textStyle: {
+            color: "#fff",
+            fontSize: 8,
+          },
+        },
+        data: yAxis,
+      },
+    ],
+    series: series,
+  };
+  myChart.setOption(option);
+  window.addEventListener("resize", function () {
+    myChart.resize();
+  });
+}
 function echart5() {
   // 基于准备好的dom，初始化echarts实例
   var myChart = echarts.init(document.getElementById("chart5"));

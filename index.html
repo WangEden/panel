@@ -15,11 +15,19 @@
         }
     </style>
     <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
-    <script type="importmap">
+    <!-- <script type="importmap">
         {
         "imports": {
             "three": "https://unpkg.com/three/build/three.module.js",
             "three/addons/": "https://unpkg.com/three/examples/jsm/"
+        }
+        }
+    </script> -->
+    <script type="importmap">
+        {
+        "imports": {
+            "three": "./node_modules/three/build/three.module.js",
+            "three/addons/": "./node_modules/three/examples/jsm/"
         }
         }
     </script>
@@ -83,14 +91,18 @@
 
                         <div class="bx2">
                             <div class="tb">
-                                <div class="cirbar" id="cir1"></div>
+                                <div class="cirbar" id="cir1">
+                                    <div id="cirLod1"><span>25</span></div>
+                                </div>
                                 <div class="tts"><div>物料增加</div></div>
-                                <div class="data"><div>250/2000</div></div>
+                                <div class="data"><div>440/2000</div></div>
                             </div>
                             <div class="tb">
-                                <div class="cirbar" id="cir2"></div>
+                                <div class="cirbar" id="cir2">
+                                    <div id="cirLod2"><span>20</span></div>
+                                </div>
                                 <div class="tts"><div>物料增加</div></div>
-                                <div class="data"><div>250/2000</div></div>
+                                <div class="data"><div>230/2000</div></div>
                             </div>
                         </div>
     
@@ -256,11 +268,20 @@
                         <div class="ct">
                             <div class="ctlch">
                                 <div class="tpdes"><span>工作功率</span></div>
-                                <div class="bpcir" id="chart3"></div>
+                                <div class="bpcir" id="chart3">
+                                    <div class="sh">
+                                        <div class="vh">
+                                            <span>200</span>
+                                            <span>w/d</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="ctlch">
                                 <div class="tpdes"><span>工作负荷</span></div>
-                                <div class="bpcir" id="chart4"></div>
+                                <div class="bpcir" id="chart4">
+
+                                </div>
                             </div>
                         </div>
 
@@ -302,7 +323,8 @@
 
                 <div class="panelBody">
                     <div class="l-btr">
-                        <div class="btr">
+                        <div id="chart8"></div>
+                        <!-- <div class="btr">
                             <div class="sqr"></div>
                             <div class="des"></div>
                         </div>
@@ -313,7 +335,7 @@
                         <div class="btr">
                             <div class="sqr"></div>
                             <div class="des"></div>
-                        </div>
+                        </div> -->
                     </div>
                     <div id="chart5"></div>
                 </div>
@@ -371,20 +393,122 @@
 
                 <div class="panelBody">
                     <div class="chart" id="chart6">
-                        
+
+                        <div class="slbli">
+                            <div class="t">
+                                <div class="xh">01</div>
+                                <div class="bt">RSRP</div>
+                                <div class="dat">900</div>
+                            </div>
+                            <div class="b">
+                                <div class="barLod">
+                                    <div class="bar bar1"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slbli">
+                            <div class="t">
+                                <div class="xh">02</div>
+                                <div class="bt">GCSDP</div>
+                                <div class="dat">844</div>
+                            </div>
+                            <div class="b">
+                                <div class="barLod">
+                                    <div class="bar bar2"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slbli">
+                            <div class="t">
+                                <div class="xh">03</div>
+                                <div class="bt">LACDA</div>
+                                <div class="dat">743</div>
+                            </div>
+                            <div class="b">
+                                <div class="barLod">
+                                    <div class="bar bar3"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slbli">
+                            <div class="t">
+                                <div class="xh">04</div>
+                                <div class="bt">PLAC</div>
+                                <div class="dat">536</div>
+                            </div>
+                            <div class="b">
+                                <div class="barLod">
+                                    <div class="bar bar4"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slbli">
+                            <div class="t">
+                                <div class="xh">05</div>
+                                <div class="bt">TRAS</div>
+                                <div class="dat">363</div>
+                            </div>
+                            <div class="b">
+                                <div class="barLod">
+                                    <div class="bar bar5"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slbli">
+                            <div class="t">
+                                <div class="xh">06</div>
+                                <div class="bt">VBHS</div>
+                                <div class="dat">474</div>
+                            </div>
+                            <div class="b">
+                                <div class="barLod">
+                                    <div class="bar bar6"></div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="r-btn-list">
                         <div class="lst-t">
-                            <div class="lii"></div>
-                            <div class="lii"></div>
-                            <div class="lii"></div>
+                            <div class="lit">
+                                <span>统计</span>
+                                <span>STATISTICS</span>
+                            </div>
+                            <div class="lii">
+                                <span>TBS</span>
+                                <span>18</span>
+                            </div>
+                            <div class="lii">
+                                <span>AC</span>
+                                <span>22</span>
+                            </div>
                         </div>
                         <div class="lst-b">
-                            <div class="lii"></div>
-                            <div class="lii"></div>
-                            <div class="lii"></div>
-                            <div class="lii"></div>
-                            <div class="lii"></div>
+                            <div class="lit">
+                                <span>概况</span>
+                                <span>OVERVIEW</span>
+                            </div>
+                            <div class="lii">
+                                <span>DC</span>
+                                <span>12</span>
+                            </div>
+                            <div class="lii">
+                                <span>AC</span>
+                                <span>23</span>
+                            </div>
+                            <div class="lii">
+                                <span>GC</span>
+                                <span>25</span>
+                            </div>
+                            <div class="lii">
+                                <span>GA</span>
+                                <span>31</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -405,7 +529,9 @@
 
                 <div class="panelBody">
                     <div class="chart7">
-                        <div class="map"></div>
+                        <div class="map">
+                            
+                        </div>
                     </div>
                 </div>
 
@@ -418,7 +544,7 @@
         import * as THREE from 'three';
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
         import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-        import { DRACOLoader  } from 'three/addons/loaders/DRACOLoader';
+        import { DRACOLoader  } from 'three/addons/loaders/DRACOLoader.js';
 
         // 创建场景和相机
         const scene = new THREE.Scene();
@@ -443,10 +569,10 @@
 
         // 导入模型并渲染
         const loader = new GLTFLoader();
-        const path =  './models/gcNewLNP.glb'
-        // var dracoLoader = new DRACOLoader();
-        // dracoLoader.setDecoderPath( 'three/js/libs/draco/gltf/' );
-        // loader.setDRACOLoader( dracoLoader );
+        const path =  './models/gcDraco.glb'
+        let dracoLoader = new DRACOLoader();
+        dracoLoader.setDecoderPath( 'node_modules/three/examples/jsm/libs/draco/' );
+        loader.setDRACOLoader( dracoLoader );
         loader.load( path, function ( gltf ) {
             scene.add( gltf.scene );
             animate();
