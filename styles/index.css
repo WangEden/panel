@@ -29,7 +29,7 @@ i { margin-left: 2%; color: #fff; font-size: 1em; }
     top: 0;
     left: 0;
     z-index: 0;
-    background-image: url(../resources/bg-test.jpg);
+    /* background-image: url(../resources/bg-test.jpg); */
     background-size: 100% 100%;
 }
 
